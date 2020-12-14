@@ -1,0 +1,7 @@
+{
+  "name": "pdfViewer",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
