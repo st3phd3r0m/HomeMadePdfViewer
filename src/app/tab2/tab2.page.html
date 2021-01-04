@@ -1,17 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <!-- Nom du fichier lu -->
     <ion-title>
-      Tab 2
+      {{ isThereAFile ? filename : 'No file selected' }}
     </ion-title>
+    <!--Fin Nom du fichier lu -->
+    <!-- Menu storage -->
+    <ion-buttons slot="end">
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <!-- Fin Menu storage -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <pdf-viewer [src]="pdfSrc"
+              [render-text]="true"
+              [fit-to-page]="true"
+              [zoom]="zoomRate"
+              *ngIf="isThereAFile"
+              (click)="onReset()"
+              (touchstart)="onFingersStart($event)"
+              (touchmove)="onFingersMove($event)"  
+              ></pdf-viewer>
+  <ion-button id="selectFile"
+    expand="block"
+    *ngIf="!isThereAFile" (click)='onBrowse()'>Select a file</ion-button>
 </ion-content>
