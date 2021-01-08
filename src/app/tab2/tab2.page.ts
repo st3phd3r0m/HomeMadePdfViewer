@@ -27,18 +27,31 @@ export class Tab2Page implements OnInit {
     let uri = this.route.snapshot.params['uri'];
     if( filename != null && uri != null ){
       this.switchViewer(filename, uri);
-    } else if( (<any>window).plugins ){
-        (<any>window).plugins.intentShim.getIntent(
-          (intent) => {
-            if (intent && intent.data && intent.type === 'application/pdf') { 
-              let uri = 'file:///'+intent.extras['AbsolutePath'];
+    } else {
+      this.manageIntents();
+    }
+  }
+
+  public manageIntents(){
+    let plugin = (<any>window).plugins;
+    if( plugin ){
+      plugin.intentShim.getIntent(
+        (intent) => {
+          if (intent.data && intent.type === 'application/pdf') { 
+            let uri = intent.data;
+            let filename: string;
+            if(intent.extras){
+              let uriArray = intent.extras['AbsolutePath'].split('/');
+              filename = uriArray[ uriArray.length-1];
+            }else{
               let uriArray = uri.split('/');
-              let filename = uriArray[ uriArray.length-1];
-              this.switchViewer(filename, uri);
-            }}, 
-          () => console.log("intent error")
-        );
-      }
+              filename = uriArray[ uriArray.length-1];
+            }
+            this.switchViewer(filename, uri);
+          }}, 
+        () => console.log("intent error")
+      );
+    }
   }
 
   public switchViewer(filename: string, uri: string){
