@@ -48,6 +48,8 @@ export class Tab2Page implements OnInit {
               filename = uriArray[ uriArray.length-1];
             }
             this.switchViewer(filename, uri);
+          }else{
+            console.log("intent error")
           }}, 
         () => console.log("intent error")
       );
@@ -55,8 +57,7 @@ export class Tab2Page implements OnInit {
   }
 
   public switchViewer(filename: string, uri: string){
-    let regexPdfFiles = /\.pdf$/;
-    if(filename == null || !regexPdfFiles.test(filename)){
+    if(filename == null){
       this.isThereAFile = false;
     }else{
       this.isThereAFile = true;
