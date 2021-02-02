@@ -14,9 +14,9 @@ export class Tab2Page implements OnInit {
   public pdfSrc: string;
   public filename: string;
   public isThereAFile: boolean = false;
-  public zoomRate: number = 1;
   private fingersDistance: number;
   public count = 0;
+  public zoomRate: number = 1;
 
   constructor(private route: ActivatedRoute, 
               public router: Router,
@@ -83,14 +83,16 @@ export class Tab2Page implements OnInit {
 
   public onFingersMove($e: any){
     let touches = $e.touches;
-    if(touches.length > 1 && this.count >= 8 ){
+    if(touches.length > 1 && this.count >= 3 ){
       let pointA=touches.item(0);
       let pointB=touches.item(1);
       let vecY=pointA.pageY-pointB.pageY;
       let vecX=pointA.pageX-pointB.pageX;
-      this.zoomRate += (Math.sqrt(vecY*vecY+vecX*vecX)/this.fingersDistance - 1); 
+      this.zoomRate += Math.trunc((Math.sqrt(vecY*vecY+vecX*vecX)/this.fingersDistance - 1)*10)/10;
+
+      console.log( this.zoomRate )
       this.count = 0;
-    }else if(this.count<8){
+    }else if(this.count<3){
       this.count++;
     }
   }
