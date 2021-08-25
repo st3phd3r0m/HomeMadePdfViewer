@@ -33,7 +33,7 @@
     </ion-item>
     <ion-item *ngFor="let file of ( directories | files)" (click)="openPdf(file.uri, file.name)">
       <ion-icon name="document"></ion-icon>
-      <p>&nbsp; {{ file.name }}</p>
+      <p>&nbsp; {{ file.name | shorten }}</p>
     </ion-item>
   </ion-list>
 </ion-content>
