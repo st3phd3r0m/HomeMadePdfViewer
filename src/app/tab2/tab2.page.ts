@@ -104,6 +104,7 @@ export class Tab2Page implements OnInit {
   public async presentPopover(ev: any) {
     let popover = await this.popover.create({
       component: HeaderComponent,
+      cssClass: 'contact-popover',
       event: ev,
       translucent: true
     });

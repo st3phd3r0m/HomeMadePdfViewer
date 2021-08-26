@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar translucent>
-    <ion-title>Browse a document</ion-title>
+    <ion-title>Browse in</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -12,7 +12,7 @@
           <rect style="fill:#000000;fill-opacity:0.8;stroke-width:0.264583"
             width="40" height="10" x="30" y="180" ry="5" />
       </svg>
-      <ion-label>Browse in internal storage</ion-label>
+      <ion-label>Internal storage</ion-label>
     </ion-item>
     <ion-item *ngIf="isThereSdCard" (click)="onNavigate(true)">
       <svg width="50" height="25" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;">
@@ -23,7 +23,7 @@
         <rect x="304" y="64" width="32" height="128"/>
         <rect x="368" y="64" width="32" height="128"/>
       </svg>
-      <ion-label>Browse in SDCard</ion-label>
+      <ion-label>SDCard</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
